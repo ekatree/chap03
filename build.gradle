@@ -16,7 +16,8 @@ apply plugin: 'eclipse-wtp'
 apply plugin: 'spring-boot'
 apply plugin: 'war'
 
-mainClassName = 'com.hybrid.Chap03Application'
+// mainClassName = 'com.hybrid.Chap03Application'
+mainClassName = 'com.hybrid.fx.MainApplication'
 
 war {
 	baseName = 'chap03'
@@ -27,6 +28,9 @@ targetCompatibility = 1.8
 
 repositories {
 	mavenCentral()
+	maven {
+        url 'http://nexus.gluonhq.com/nexus/content/repositories/releases'
+    }
 }
 
 configurations {
@@ -34,6 +38,8 @@ configurations {
 }
 
 dependencies {
+	compile 'com.gluonhq:particle:1.1.0'
+	
 	compile('org.springframework.boot:spring-boot-starter-web')
 	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
