@@ -3,11 +3,16 @@ package com.hybrid.fx.controllers;
 import com.gluonhq.particle.application.ParticleApplication;
 import com.gluonhq.particle.state.StateManager;
 import com.gluonhq.particle.view.ViewManager;
+
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
+
 import javax.inject.Inject;
 import org.controlsfx.control.action.Action;
 import org.controlsfx.control.action.ActionMap;
@@ -27,7 +32,13 @@ public class PrimaryController {
     private Label label;
     
     @FXML
-    private Button button;
+    private Button button, home, btnHello2, btnHello, btnDept, btnDir;
+    
+    @FXML
+    private WebView myweb;
+    
+    @FXML
+    private TextField url;
     
     @FXML
     private ResourceBundle resources;
@@ -39,6 +50,39 @@ public class PrimaryController {
         actionSignin =  ActionMap.action("signin");
         
         button.setOnAction(e -> viewManager.switchView("secondary"));
+        
+        WebEngine engine = myweb.getEngine();
+        engine.load("http://localhost:8080/Hello");
+        url.setText("http://localhost:8080/Hello");
+        
+        home.setOnAction(e->{
+        	engine.load("http://localhost:8080/Hello.jsp");
+        	url.setText("http://localhost:8080/Hello.jsp");
+        });
+        
+        btnDept.setOnAction(e->{
+        	engine.load("http://localhost:8080/deptList.jsp");
+        	url.setText("http://localhost:8080/deptList.jsp");
+        });
+        
+        btnHello.setOnAction(e->{
+        	engine.load("http://localhost:8080/Hello.html");
+        	url.setText("http://localhost:8080/Hello.html");
+        });
+        
+        btnHello2.setOnAction(e->{
+        	engine.load("http://localhost:8080/Hello2");
+        	url.setText("http://localhost:8080/Hello2");
+        });
+        
+        btnDir.setOnAction(e->{
+        	engine.load("http://localhost:8080/directive.jsp");
+        	url.setText("http://localhost:8080/directive.jsp");
+        });
+        
+        url.setOnAction(e->{
+        	engine.load(url.getText());
+        });
         
     }
     

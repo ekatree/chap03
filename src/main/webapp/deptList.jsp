@@ -1,3 +1,5 @@
+<%@page import="org.springframework.context.ApplicationContext"%>
+<%@page import="org.springframework.web.context.support.WebApplicationContextUtils"%>
 <%@page import="com.hybrid.domain.Dept"%>
 <%@page import="com.hybrid.mapper.DeptMapper"%>
 <%@page import="java.util.List"%>
@@ -12,7 +14,8 @@
 </head>
 <body>
 <%
-	DeptMapper mapper = MainApplication.ctx.getBean(DeptMapper.class);
+	ApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext());
+	DeptMapper mapper = ctx.getBean(DeptMapper.class);	
 
 	List<Dept> depts=mapper.readAll();
 
